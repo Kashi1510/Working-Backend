@@ -6,39 +6,38 @@ import com.example.Internship_portal.student.Student;
 import com.example.Internship_portal.student.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private StudentService studentService;
+    private  StudentService studentService;
 
     @Autowired
     private CompanyService companyService;
 
     @Override
-    public Object login(String email, String password) {
-    	// Check student record
+    public ResponseEntity<?> login(String email, String password) {
         Student student = studentService.findByEmail(email);
-        // Check company record
         Company company = companyService.findByEmail(email);
 
-        // Ensure email is unique across both tables
+        // Ensure email is not present in both tables
         if (student != null && company != null) {
-            throw new IllegalStateException("Error: Duplicate email found in both student and company records!");
+            return ResponseEntity.badRequest().body("{\"error\": \"Duplicate email found in both student and company records!\"}");
         }
 
         // If email belongs to a student
-        if (student != null) {
-            return student.getPassword().equals(password) ? student : null;
+        if (student != null && student.getPassword().equals(password)) {
+            return ResponseEntity.ok("{\"dashboard\": \"/student-dashboard\"}");
         }
 
-        // If email belongs to a company
-        if (company != null) {
-            return company.getPassword().equals(password) ? company : null;
+        // If email belongs to an employer
+        if (company != null && company.getPassword().equals(password)) {
+            return ResponseEntity.ok("{\"dashboard\": \"/employer-dashboard\"}");
         }
 
-        return null; // No user found with given email
+        return ResponseEntity.status(401).body("{\"error\": \"Invalid email or password\"}");
     }
 }

@@ -1,5 +1,7 @@
 package com.example.Internship_portal.login;
 
+import org.springframework.http.ResponseEntity;
+
 public interface LoginService {
-    Object login(String email, String password);
+    ResponseEntity<?> login(String email, String password);
 }
