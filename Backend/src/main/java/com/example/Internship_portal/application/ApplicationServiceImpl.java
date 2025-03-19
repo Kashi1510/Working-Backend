@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Internship_portal.company.CompanyRepository;
 import com.example.Internship_portal.student.Student;
 import com.example.Internship_portal.student.StudentRepository;
 
@@ -20,6 +21,10 @@ public class ApplicationServiceImpl implements ApplicationService {
     
     @Autowired
     private StudentRepository studentRepository;
+    
+    @Autowired
+    private CompanyRepository companyRepository;
+    
     @Override
     public Application applyForInternship(Application application) {
         application.setStatus("Pending");

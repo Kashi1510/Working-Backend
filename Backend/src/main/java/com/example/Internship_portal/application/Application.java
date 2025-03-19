@@ -3,9 +3,11 @@ package com.example.Internship_portal.application;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.example.Internship_portal.company.Company;
 import com.example.Internship_portal.internship.Internship;
 import com.example.Internship_portal.student.Student;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -34,6 +36,14 @@ public class Application {
 	    private Date appliedDate;
 	    private String status;
 	    private LocalDate interviewDate;
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "company_id")
+	    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	    private Company company;
+	    
+	    
+	    
 		public Application() {
 			super();
 		}
@@ -46,7 +56,7 @@ public class Application {
 		}
 		
 		public Application(Long id, Student student, Internship internship, Date appliedDate, String status,
-				LocalDate interviewDate) {
+				LocalDate interviewDate, Company company) {
 			super();
 			this.id = id;
 			this.student = student;
@@ -54,6 +64,7 @@ public class Application {
 			this.appliedDate = appliedDate;
 			this.status = status;
 			this.interviewDate = interviewDate;
+			this.company=company;
 		}
 		public Long getId() {
 			return id;
@@ -91,6 +102,13 @@ public class Application {
 		public void setInterviewDate(LocalDate localDate) {
 			this.interviewDate = localDate;
 		}
+		public Company getCompany() {
+			return this.internship != null ? this.internship.getCompany() : null;
+		}
+		public void setCompany(Company company) {
+			this.company = company;
+		}
+		
 //	
 	
 		

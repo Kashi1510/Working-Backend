@@ -21,7 +21,7 @@ public class Company {
 	private String password;
 	private String address;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "company")
 	Collection<Internship> internships = new ArrayList<>();
 
 	public Company() {
@@ -29,7 +29,7 @@ public class Company {
 	}
 
 	public Company(Integer id, String companyname, String city, String email, String password,
-			String address) {
+			String address,Collection<Internship> internships) {
 		super();
 		this.id = id;
 		this.companyname = companyname;
@@ -37,6 +37,7 @@ public class Company {
 		this.email = email;
 		this.password = password;
 		this.address = address;
+		this.internships=internships;
 	}
 	
 
@@ -95,5 +96,6 @@ public class Company {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 
 }
