@@ -1,7 +1,10 @@
 package com.example.Internship_portal.login;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class LoginDTO {
     private String email;
+    
     private String password;
 
     public LoginDTO() {}

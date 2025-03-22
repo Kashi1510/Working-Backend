@@ -30,12 +30,14 @@ public class LoginServiceImpl implements LoginService {
 
         // If email belongs to a student
         if (student != null && student.getPassword().equals(password)) {
-            return ResponseEntity.ok("{\"dashboard\": \"/student-dashboard\"}");
+//            return ResponseEntity.ok("{\"dashboard\": \"/student-dashboard\"}");
+        	return ResponseEntity.ok(student);
         }
 
         // If email belongs to an employer
         if (company != null && company.getPassword().equals(password)) {
-            return ResponseEntity.ok("{\"dashboard\": \"/employer-dashboard\"}");
+//           return ResponseEntity.ok("{\"dashboard\": \"/employer-dashboard\"}");
+        	 return ResponseEntity.ok(company);
         }
 
         return ResponseEntity.status(401).body("{\"error\": \"Invalid email or password\"}");

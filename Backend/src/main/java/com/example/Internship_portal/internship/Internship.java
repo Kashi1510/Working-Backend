@@ -22,10 +22,11 @@ public class Internship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String companyname;
     private String description;
     
     @ManyToOne
-    @JoinColumn(name = "company_id") // This should match the column name in the database
+//    @JoinColumn(name = "company_id") // This should match the column name in the database
     private Company company;
     
     // Add the company field
@@ -40,14 +41,15 @@ public class Internship {
 	}
     
     public Internship(Long id, String title, String description, String companyName,
-			Collection<Application> applications, Company company) {
+			Collection<Application> applications,String companyname) {
 		super();
 		this.id = id;
-		this.title = title;
+		this.companyname=companyname;
+
 		this.description = description;
     	
 		this.applications = applications;
-		this.company=company;
+		
 	}
     
     
@@ -95,6 +97,14 @@ public class Internship {
 		this.company = company;
 	}
 //	
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
 	
 
 }

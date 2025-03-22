@@ -6,7 +6,6 @@ import java.util.Date;
 import com.example.Internship_portal.company.Company;
 import com.example.Internship_portal.internship.Internship;
 import com.example.Internship_portal.student.Student;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
